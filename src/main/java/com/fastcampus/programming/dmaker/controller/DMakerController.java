@@ -17,7 +17,7 @@ public class DMakerController {
 
     private final DMakerService dMakerService;
 
-    @GetMapping("/developers")
+    @PostMapping("/developers")
     public void register() {
         dMakerService.createDeveloper();
     }
