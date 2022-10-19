@@ -1,6 +1,6 @@
 package com.fastcampus.programming.dmaker.entity;
 
-import com.fastcampus.programming.dmaker.type.DeveloperLever;
+import com.fastcampus.programming.dmaker.type.DeveloperLevel;
 import com.fastcampus.programming.dmaker.type.DeveloperSkillType;
 import lombok.*;
 import org.springframework.data.annotation.CreatedDate;
@@ -25,7 +25,7 @@ public class Developer {
     private Long id;
 
     @Enumerated(EnumType.STRING)
-    private DeveloperLever developerLever;
+    private DeveloperLevel developerLever;
 
     @Enumerated(EnumType.STRING)
     private DeveloperSkillType developerSkillType;
