@@ -1,14 +1,16 @@
 package com.fastcampus.programming.dmaker.controller;
 
 import com.fastcampus.programming.dmaker.dto.CreateDeveloper;
+import com.fastcampus.programming.dmaker.dto.DeveloperDetailDto;
+import com.fastcampus.programming.dmaker.dto.DeveloperDto;
+import com.fastcampus.programming.dmaker.dto.EditDeveloper;
 import com.fastcampus.programming.dmaker.service.DMakerService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.List;
 
 @RestController
 @Slf4j
@@ -18,9 +20,28 @@ public class DMakerController {
     private final DMakerService dMakerService;
 
     @PostMapping("/developers")
-    public void register(@Valid @RequestBody CreateDeveloper.Request request) {
-        log.info("request : {}", request);
+    public CreateDeveloper.Response register(@Valid @RequestBody CreateDeveloper.Request request) {
+        return dMakerService.createDeveloper(request);
+    }
 
-        dMakerService.createDeveloper(request);
+    @GetMapping("/developers")
+    public List<DeveloperDto> getList() {
+        return dMakerService.getAllEmployedDevelopers();
+    }
+
+    @GetMapping("/developer/{memberId}")
+    public DeveloperDetailDto getDeveloper(@PathVariable String memberId) {
+        return dMakerService.getDeveloper(memberId);
+    }
+
+    @PutMapping("/developer/{memberId}")
+    public DeveloperDetailDto updateDeveloper(@PathVariable String memberId, @Valid @RequestBody EditDeveloper.Request request
+    ) {
+        return dMakerService.editDeveloper(memberId, request);
+    }
+
+    @DeleteMapping("/developer/{memberId}")
+    public DeveloperDetailDto deleteDeveloper(@PathVariable String memberId) {
+        return dMakerService.deleteDeveloper(memberId);
     }
 }
